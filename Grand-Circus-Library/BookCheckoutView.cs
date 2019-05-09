@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Grand_Circus_Library
 {
-    class BookCheckoutView
+    class BookCheckoutView : IView
     {
+        public void Display()
+        {
+            Console.WriteLine("Which book would you like to check out: ");
+        }
     }
 }
