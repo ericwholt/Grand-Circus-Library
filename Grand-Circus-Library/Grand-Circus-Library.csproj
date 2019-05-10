@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,7 +46,9 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BookCheckoutView.cs" />
+    <Compile Include="BookErrorView.cs" />
     <Compile Include="BookListView.cs" />
+    <Compile Include="BookLoadCSV.cs" />
     <Compile Include="BookMenuView.cs" />
     <Compile Include="BookReturnView.cs" />
     <Compile Include="BookSearchView.cs" />
