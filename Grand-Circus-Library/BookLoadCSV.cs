@@ -17,15 +17,18 @@ namespace Grand_Circus_Library
 
         public List<Book> GetBookList()
         {
-            List<List<string>> csv = new List<List<string>>();
-            string path = ConfigurationManager.AppSettings["Path"];
-            string[] csvRows;
+            List<List<string>> csv = new List<List<string>>();//This represents the excel sheet. The list inside are the rows and columns
+            string path = ConfigurationManager.AppSettings["Path"];//Get path from the configuration file.
+            string[] csvRows;//To store strings read in from File
+
+            //Check if the path is valid
             if (File.Exists(path))
             {
-                csvRows = File.ReadAllLines(ConfigurationManager.AppSettings["Path"]);
+                csvRows = File.ReadAllLines(ConfigurationManager.AppSettings["Path"]);//Store each line of csv into a string array
             }
             else
             {
+                //Path wasn't valid return null.
                 Console.WriteLine("Unable to connect to csv file");
                 return null;
             }

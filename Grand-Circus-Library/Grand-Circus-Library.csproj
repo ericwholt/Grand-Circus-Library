@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BookCheckoutView.cs" />
+    <Compile Include="BookErrorView.cs" />
     <Compile Include="BookListView.cs" />
     <Compile Include="BookLoadCSV.cs" />
     <Compile Include="BookMenuView.cs" />
