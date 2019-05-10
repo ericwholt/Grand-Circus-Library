@@ -58,7 +58,7 @@ namespace Grand_Circus_Library
                         if (i < csvRow.Length - 1 && csvRow[i] == quoteChar && csvRow[i + 1] == quoteChar)
                         {
                             i++;
-                            field += quoteChar;
+                            field += quoteChar;//Not sure the need for this
                         }
                         else if (csvRow[i] == quoteChar)
                         {
@@ -73,8 +73,10 @@ namespace Grand_Circus_Library
                     {
                         if (csvRow[i] == quoteChar)
                         {
+                            i++;//This removes beginning quote on the synopsis
                             inQuotes = true;
                         }
+
                         if (csvRow[i] == sepChar)
                         {
                             fields.Add(field);
@@ -125,7 +127,7 @@ namespace Grand_Circus_Library
                 }
                 BookList.Add(b);
             }
-            Console.WriteLine("BookList Count: "+BookList.Count);
+            Console.WriteLine("BookList Count: "+BookList.Count);//Remove 
             return BookList;
         }
 
