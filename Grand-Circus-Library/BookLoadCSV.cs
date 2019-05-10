@@ -28,9 +28,9 @@ namespace Grand_Circus_Library
             }
             else
             {
-                //Path wasn't valid return null.
-                Console.WriteLine("Unable to connect to csv file");
-                return null;
+        //Path wasn't valid return null.
+        List<Book> EmptyBookList = new List<Book>();
+                return EmptyBookList;
             }
 
 
