@@ -23,6 +23,8 @@ namespace Grand_Circus_Library
                 Console.WriteLine($"Status: {(book.Status ? "On Shelf" : "Checked Out")}"); //Ternary to display On Shelf if true or Checked Out if false
                 Console.WriteLine("Synopsis: " + book.Synopsis);
             }
+            Console.ReadKey();
+
             //Book b = new Book();
             //b.Title = "Clifford the Big Red Dog";
             //b.Author = "Norman Bridwell";

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 
 namespace Grand_Circus_Library
 {
@@ -16,7 +18,17 @@ namespace Grand_Circus_Library
         public List<Book> GetBookList()
         {
             List<List<string>> csv = new List<List<string>>();
-            string[] csvRows = System.IO.File.ReadAllLines("./test.csv");
+            string path = ConfigurationManager.AppSettings["Path"];
+            string[] csvRows;
+            if (File.Exists(path))
+            {
+                csvRows = File.ReadAllLines(ConfigurationManager.AppSettings["Path"]);
+            }
+            else
+            {
+                Console.WriteLine("Unable to connect to csv file");
+                return null;
+            }
 
 
             char sepChar = ',';
