@@ -11,7 +11,7 @@ namespace Grand_Circus_Library
         public List<Book> BookList { get; set; }
         public BookReturnView(List<Book> BookList)
         {
-
+            this.BookList = BookList;
         }
 
         public void Display()

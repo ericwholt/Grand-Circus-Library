@@ -127,7 +127,7 @@ namespace Grand_Circus_Library
                 }
                 BookList.Add(b);
             }
-            Console.WriteLine("BookList Count: "+BookList.Count);//Remove 
+
             return BookList;
         }
 
