@@ -15,12 +15,15 @@ namespace Grand_Circus_Library
                 foreach (Book book in BookList)
                 {
                     Console.WriteLine("Book " + counter);
+                    Console.WriteLine("------");
                     Console.WriteLine("Title: " + book.Title);
                     Console.WriteLine("Author: " + book.Author);
                     Console.WriteLine("Genre: " + book.Genre);
                     Console.WriteLine("Publisher: " + book.Publisher);
                     Console.WriteLine($"Status: {(book.Status ? "On Shelf" : "Checked Out")}"); //Ternary to display On Shelf if true or Checked Out if false
                     Console.WriteLine("Synopsis: " + book.Synopsis);
+                    Console.WriteLine( );
+                    counter++;
                 }
             }
             Console.ReadKey();
