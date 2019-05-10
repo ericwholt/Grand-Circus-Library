@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace Grand_Circus_Library
 {
-    class BookErrorView
+    class BookErrorView : IView
     {
-        public BookErrorView(string message)
+
+    public string Message { get; set; }
+
+    public BookErrorView(string Message)
+    {
+      this.Message = Message;
+    }    
+
+        public void Display()
         {
-            Console.WriteLine(message);
+          Console.WriteLine(Message);
         }
     }
 }
