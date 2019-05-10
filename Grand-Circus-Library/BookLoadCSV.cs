@@ -36,17 +36,25 @@ namespace Grand_Circus_Library
 
             char sepChar = ',';
             char quoteChar = '"';
-
+            bool skipHeader = true;
             foreach (string csvRow in csvRows)
             {
-                List<string> fields = new List<string>();
+                if (skipHeader)
+                {
+                    //Skip first line as it is the header
+                    skipHeader = false;
+                    continue; 
+                }
+                List<string> fields = new List<string>();//This is the rows of the csv
                 bool inQuotes = false;
                 string field = "";
                 Book b = new Book();
                 for (int i = 0; i < csvRow.Length; i++)
-                {
+                { 
+                    //in order to have text with commas you have to wrap in double quotes. In order to have double quotes you have to escape it with double quotes.
                     if (inQuotes)
                     {
+                        //Check if we have a escaped quote char as we go through the string
                         if (i < csvRow.Length - 1 && csvRow[i] == quoteChar && csvRow[i + 1] == quoteChar)
                         {
                             i++;
