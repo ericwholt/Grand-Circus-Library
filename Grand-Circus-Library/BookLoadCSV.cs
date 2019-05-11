@@ -24,12 +24,25 @@ namespace Grand_Circus_Library
             //Check if the path is valid
             if (File.Exists(path))
             {
-                csvRows = File.ReadAllLines(ConfigurationManager.AppSettings["Path"]);//Store each line of csv into a string array
+                try
+                {
+                    csvRows = File.ReadAllLines(ConfigurationManager.AppSettings["Path"]);//Store each line of csv into a string array
+
+                }
+                catch (Exception)
+                {
+                    List<Book> BookListOf20 = new List<Book>();
+                    for (int i = 0; i < 20; i++)
+                    {
+                        BookListOf20.Add(new Book());
+                    }
+                    return BookListOf20;
+                }
             }
             else
             {
-        //Path wasn't valid return null.
-        List<Book> EmptyBookList = new List<Book>();
+                //Path wasn't valid return null.
+                List<Book> EmptyBookList = new List<Book>();
                 return EmptyBookList;
             }
 
@@ -43,14 +56,14 @@ namespace Grand_Circus_Library
                 {
                     //Skip first line as it is the header
                     skipHeader = false;
-                    continue; 
+                    continue;
                 }
                 List<string> fields = new List<string>();//This is the rows of the csv
                 bool inQuotes = false;
                 string field = "";
                 Book b = new Book();
                 for (int i = 0; i < csvRow.Length; i++)
-                { 
+                {
                     //in order to have text with commas you have to wrap in double quotes. In order to have double quotes you have to escape it with double quotes.
                     if (inQuotes)
                     {
@@ -133,7 +146,7 @@ namespace Grand_Circus_Library
 
             return BookList;
         }
-        
+
         private DateTime ValidateDateTime(string dateTime)
         {
             try
