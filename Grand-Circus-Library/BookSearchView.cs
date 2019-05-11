@@ -10,6 +10,7 @@ namespace Grand_Circus_Library
     {
         public void Display()
         {
+            Console.Clear();
             Console.WriteLine("1. Search by Title");
             Console.WriteLine("2. Search by Author");
             Console.WriteLine("3. Search by Genre");
