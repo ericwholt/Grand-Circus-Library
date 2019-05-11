@@ -10,7 +10,7 @@ namespace Grand_Circus_Library
     {
         public void Display()
         {
-            Console.WriteLine("Which book would you like to check out: ");
+            Console.Write("Which book would you like to check out: ");
         }
     }
 }
