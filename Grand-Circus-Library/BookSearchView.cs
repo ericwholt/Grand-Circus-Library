@@ -14,7 +14,7 @@ namespace Grand_Circus_Library
             Console.WriteLine("2. Search by Author");
             Console.WriteLine("3. Search by Genre");
             Console.WriteLine("4. Search by Dewey Decimal System");
-            Console.Write("How can we help you? Select 1-4: ");
+            Console.Write("How can we help you? Select 1-4 or (C)ancel: ");
         }
     }
 }
