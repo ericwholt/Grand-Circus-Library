@@ -17,9 +17,15 @@ namespace Grand_Circus_Library
             Console.Clear();
             for (int i = 0; i < BookList.Count; i++)
             {
-                if (BookList[i].Status == true)
+                if (BookList[i].Status == false)
                 {
-                    Console.WriteLine($"{i + 1} {BookList[i].Title}");
+                //Eric please add Ternary for status
+
+                Console.WriteLine($"{i + 1}. {BookList[i].Title} status {BookList[i].Status} due back on {BookList[i].DueDate.ToShortDateString()}");
+                }
+                else
+                {
+                  Console.WriteLine($"{i + 1}. {BookList[i].Title} status {BookList[i].Status}");
                 }
             }
         }
