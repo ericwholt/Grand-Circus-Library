@@ -305,8 +305,7 @@ namespace Grand_Circus_Library
 
                 int userInput = GetIntFromUser(1, ListOfBookIndexesCheckedOut.Count);
                 if (!(userInput == -1))
-                {
-                    
+                {                    
                     for (int i = 0; i < CheckoutBookList.Count; i++)
                     {
                         if (CheckoutBookList[i] == LibraryDb[userInput - 1])
