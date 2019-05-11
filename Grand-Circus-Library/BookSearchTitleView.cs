@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grand_Circus_Library
 {
-  class BookSearchTitleView : IView
-  {
-    public void Display()
+    class BookSearchTitleView : IView
     {
-      Console.Write("Title of the book: ");
+        public void Display()
+        {
+            Console.Clear();
+            Console.Write("Search by title of the book: ");
+        }
     }
-  }
 }

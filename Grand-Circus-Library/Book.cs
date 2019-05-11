@@ -20,7 +20,6 @@ namespace Grand_Circus_Library
         public override string ToString()
         {
             return $"\"{Title}\",{Author},{Genre},{Status},{DueDate},{DeweySystem},\"{Synopsis}\"";
-      //add dewey
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Grand_Circus_Library
         public void Display()
         {
             Console.WriteLine("Book Information: ");
+            Console.WriteLine("------------------------------------");
             Console.WriteLine("Title: "+Book.Title);
             Console.WriteLine("Author: " + Book.Author);
             Console.WriteLine("Genre: " + Book.Genre);
@@ -27,6 +28,7 @@ namespace Grand_Circus_Library
             Console.WriteLine($"Status: {(Book.Status ? "On Shelf" : "Checked Out")}"); //Ternary to display On Shelf if true or Checked Out if false
             Console.WriteLine("Call Number: " + Book.DeweySystem);
             Console.WriteLine("Synopsis: " + Book.Synopsis);
+            Console.WriteLine("------------------------------------");
         }
     }
 }

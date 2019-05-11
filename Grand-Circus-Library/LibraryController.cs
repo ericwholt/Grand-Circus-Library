@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Grand_Circus_Library
 {
@@ -56,6 +57,7 @@ namespace Grand_Circus_Library
         {
             BookWelcomeView wv = new BookWelcomeView();
             wv.Display();
+            Thread.Sleep(5000);
         }
 
         public void LibraryMenu()
@@ -85,7 +87,6 @@ namespace Grand_Circus_Library
 
         public void SearchMenu()
         {
-
             BookSearchView smv = new BookSearchView();
             smv.Display();
             int userInput = GetIntFromUser(1, 4);
@@ -108,6 +109,7 @@ namespace Grand_Circus_Library
             }
             else
             {
+                Console.WriteLine("No book found based on your search parameters.");
                 LibraryMenu();
             }
         }
@@ -118,17 +120,26 @@ namespace Grand_Circus_Library
             bstv.Display();
 
             string userInput = Console.ReadLine().ToLower();
-
+            bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
                 if (LibraryDb[i].Title.ToLower().Contains(userInput))
                 {
-                    //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-
+                    foundBook = true;
                     BookView bv = new BookView(LibraryDb[i]);
                     bv.Display();
                 }
             }
+            if (!foundBook)
+            {
+                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                bev.Display();
+            }
+            else
+            {
+                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
+            }
+
             ReturnToMainMenuPrompt();
         }
 
@@ -138,18 +149,31 @@ namespace Grand_Circus_Library
             bsav.Display();
 
             string userInput = Console.ReadLine().ToLower();
-
+            bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
                 if (LibraryDb[i].Author.ToLower().Contains(userInput))
                 {
                     //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-
+                    foundBook = true;
                     BookView bv = new BookView(LibraryDb[i]);
                     bv.Display();
                 }
+                else
+                {
+
+                }
             }
-            ReturnToMainMenuPrompt();
+            if (!foundBook)
+            {
+                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                bev.Display();
+            }
+            else
+            {
+                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
+            }
+                ReturnToMainMenuPrompt();
         }
 
         public void SearchBookGenre()
@@ -158,15 +182,25 @@ namespace Grand_Circus_Library
             bsgv.Display();
 
             string userInput = Console.ReadLine().ToLower();
-
+            bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
                 if (LibraryDb[i].Genre.ToLower().Contains(userInput))
                 {
+                    foundBook = true;
                     //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
                     BookView bv = new BookView(LibraryDb[i]);
                     bv.Display();
                 }
+            }
+            if (!foundBook)
+            {
+                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                bev.Display();
+            }
+            else
+            {
+                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
             }
             ReturnToMainMenuPrompt();
         }
@@ -176,15 +210,26 @@ namespace Grand_Circus_Library
             bsdv.Display();
 
             string userInput = Console.ReadLine().ToLower();
-
+            bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
                 if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
                 {
+                    foundBook = true;
                     Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
                     //BookView bv = new BookView(LibraryDb[i]);
                     //bv.Display();
                 }
+            }
+
+            if (!foundBook)
+            {
+                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                bev.Display();
+            }
+            else
+            {
+                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
             }
             ReturnToMainMenuPrompt();
         }

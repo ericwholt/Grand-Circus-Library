@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grand_Circus_Library
 {
-  class BookSearchDeweyView : IView
-  {
-    public void Display()
+    class BookSearchDeweyView : IView
     {
-      Console.WriteLine("Dewey Decimal System: ");
-      Console.WriteLine("FIC Fiction");
-      Console.WriteLine("000 Computer Science, Information & General Works");
-      Console.WriteLine("100 Philosophy & Psychology");
-      Console.WriteLine("200 Religion");
-      Console.WriteLine("300 Social Sciences");
-      Console.WriteLine("400 Language");
-      Console.WriteLine("500 Science");
-      Console.WriteLine("600 Technology");
-      Console.WriteLine("700 Arts & recreation");
-      Console.WriteLine("800 Literature");
-      Console.WriteLine("900 History & Geography");
-    
-      Console.Write("Select a category FIC to 900 to search on: ");
+        public void Display()
+        {
+            Console.Clear();
+            Console.WriteLine("Dewey Decimal System: ");
+            Console.WriteLine("FIC Fiction");
+            Console.WriteLine("000 Computer Science, Information & General Works");
+            Console.WriteLine("100 Philosophy & Psychology");
+            Console.WriteLine("200 Religion");
+            Console.WriteLine("300 Social Sciences");
+            Console.WriteLine("400 Language");
+            Console.WriteLine("500 Science");
+            Console.WriteLine("600 Technology");
+            Console.WriteLine("700 Arts & recreation");
+            Console.WriteLine("800 Literature");
+            Console.WriteLine("900 History & Geography");
+
+            Console.Write("Select a category FIC to 900 to search on: ");
+        }
     }
-  }
 }

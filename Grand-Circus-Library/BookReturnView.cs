@@ -36,7 +36,7 @@ namespace Grand_Circus_Library
                 {
                     if (!BookList[i].Status)
                     {
-                        Console.WriteLine($"{i + 1} {BookList[i].Title} due by {BookList[i].DueDate}");
+                        Console.WriteLine($"{i + 1} {BookList[i].Title} due by {BookList[i].DueDate.ToShortDateString()}");
                     }
                 }
                 Console.Write("Which book would you like to return: ");

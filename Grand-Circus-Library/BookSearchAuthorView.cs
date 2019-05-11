@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grand_Circus_Library
 {
-  class BookSearchAuthorView : IView
-  {
-    public void Display()
+    class BookSearchAuthorView : IView
     {
-      Console.Write("Author of the book: ");
+        public void Display()
+        {
+            Console.Clear();
+            Console.Write("Author of the book: ");
+        }
     }
-  }
 }
