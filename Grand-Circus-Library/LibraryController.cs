@@ -104,7 +104,10 @@ namespace Grand_Circus_Library
             {
                 if (LibraryDb[i].Title.ToLower().Contains(userInput))
                 {
-                    Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+                    //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+
+                    BookView bv = new BookView(LibraryDb[i]);
+                    bv.Display();
                 }
             }
             Console.WriteLine("Press any key to return to main menu.");
@@ -123,8 +126,11 @@ namespace Grand_Circus_Library
             {
                 if (LibraryDb[i].Author.ToLower().Contains(userInput))
                 {
-                    Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-                }
+                    //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+
+                    BookView bv = new BookView(LibraryDb[i]);
+                    bv.Display();
+        }
             }
             Console.WriteLine("Press any key to return to main menu.");
             Console.ReadLine();
@@ -142,8 +148,10 @@ namespace Grand_Circus_Library
             {
                 if (LibraryDb[i].Genre.ToLower().Contains(userInput))
                 {
-                    Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-                }
+                    //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+                    BookView bv = new BookView(LibraryDb[i]);
+                    bv.Display();
+        }
             }
             Console.WriteLine("Press any key to return to main menu.");
             Console.ReadLine();
@@ -161,18 +169,24 @@ namespace Grand_Circus_Library
 
             List<Book> CheckoutBookList = new List<Book>();
 
-            CheckoutBookList.Add(LibraryDb[userInput]);
-            blv.BookList.RemoveAt(userInput);
+            CheckoutBookList.Add(LibraryDb[userInput-1]);
+            //blv.BookList.RemoveAt(userInput);
+            LibraryDb[userInput - 1].Status = false;
+            LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
+
+             blv.Display();
 
             Console.WriteLine("Do you want to check out another book? Y/N"); //need to add loop
 
-            blv.Display(); //leftover books to choose from to add to cart again
+            //leftover books to choose from to add to cart again
+            
+            
 
             Console.WriteLine("Books in your check out cart:");
 
             for (int i = 0; i < CheckoutBookList.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {CheckoutBookList[i].Title}");
+                Console.WriteLine($"{i + 1}. {CheckoutBookList[i].Title} due on {CheckoutBookList[i].DueDate.ToShortDateString()}");
             }
             //BookSaveCSV bscsv = new BookSaveCSV(LibraryDb);
             //bscsv.SaveBookList();
