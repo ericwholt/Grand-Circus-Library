@@ -16,6 +16,10 @@ namespace Grand_Circus_Library
         public bool Status { get; set; }
         public DateTime DueDate { get; set; }
 
+        public override string ToString()
+        {
+            return $"\"{Title}\",{Author},{Genre},{Status},{DueDate},\"{Synopsis}\"";
+        }
         //TODO: Possibly add genre
         //TODO: Dewey Decimal system
     }
