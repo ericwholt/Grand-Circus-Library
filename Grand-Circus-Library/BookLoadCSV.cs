@@ -11,7 +11,7 @@ namespace Grand_Circus_Library
 
         public BookLoadCSV()
         {
-            this.BookList = new List<Book>();
+            BookList = new List<Book>();
         }
 
 
