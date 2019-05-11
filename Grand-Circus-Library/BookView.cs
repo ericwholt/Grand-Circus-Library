@@ -19,7 +19,7 @@ namespace Grand_Circus_Library
 
         public void Display()
         {
-            Console.WriteLine("Book Information: ");
+            Console.WriteLine();
             Console.WriteLine("------------------------------------");
             Console.WriteLine("Title: "+Book.Title);
             Console.WriteLine("Author: " + Book.Author);

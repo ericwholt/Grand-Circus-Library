@@ -4,7 +4,6 @@ using System.Threading;
 
 namespace Grand_Circus_Library
 {
-
     class LibraryController
     {
         public List<Book> LibraryDb { get; set; }
@@ -89,21 +88,25 @@ namespace Grand_Circus_Library
         {
             BookSearchView smv = new BookSearchView();
             smv.Display();
-            int userInput = GetIntFromUser(1, 4);
+            int userInput = GetIntFromUser(1, 5);
 
             if (userInput == 1)
             {
-                SearchBookTitle();
+                SearchBookAll();
             }
             else if (userInput == 2)
             {
-                SearchBookAuthor();
+              SearchBookAuthor();
             }
             else if (userInput == 3)
             {
-                SearchBookGenre();
+                SearchBookAuthor();
             }
             else if (userInput == 4)
+            {
+                SearchBookGenre();
+            }
+            else if (userInput == 5)
             {
                 SearchBookDewey();
             }
@@ -114,7 +117,21 @@ namespace Grand_Circus_Library
             }
         }
 
-        public void SearchBookTitle()
+    public void SearchBookAll()
+    {
+      BookSearchAllView bsav = new BookSearchAllView();
+      bsav.Display();
+
+      for (int i = 0; i < LibraryDb.Count; i++)
+      { 
+          BookView bv = new BookView(LibraryDb[i]);
+          bv.Display();
+      }
+
+      ReturnToMainMenuPrompt();
+    }
+
+    public void SearchBookTitle()
         {
             BookSearchTitleView bstv = new BookSearchTitleView();
             bstv.Display();
@@ -132,12 +149,8 @@ namespace Grand_Circus_Library
             }
             if (!foundBook)
             {
-                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                BookErrorView bev = new BookErrorView("No book title was found based on your search parameters.");
                 bev.Display();
-            }
-            else
-            {
-                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
             }
 
             ReturnToMainMenuPrompt();
@@ -166,12 +179,8 @@ namespace Grand_Circus_Library
             }
             if (!foundBook)
             {
-                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                BookErrorView bev = new BookErrorView("No author was found based on your search parameters.");
                 bev.Display();
-            }
-            else
-            {
-                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
             }
                 ReturnToMainMenuPrompt();
         }
@@ -195,12 +204,8 @@ namespace Grand_Circus_Library
             }
             if (!foundBook)
             {
-                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                BookErrorView bev = new BookErrorView("No book genre was found based on your search parameters.");
                 bev.Display();
-            }
-            else
-            {
-                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
             }
             ReturnToMainMenuPrompt();
         }
@@ -216,7 +221,7 @@ namespace Grand_Circus_Library
                 if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
                 {
                     foundBook = true;
-                    Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+                    Console.WriteLine($"{i+1}. {LibraryDb[i].Title} call number {LibraryDb[i].DeweySystem}");
                     //BookView bv = new BookView(LibraryDb[i]);
                     //bv.Display();
                 }
@@ -224,13 +229,10 @@ namespace Grand_Circus_Library
 
             if (!foundBook)
             {
-                BookErrorView bev = new BookErrorView("No book title found contain your search parameters.");
+                BookErrorView bev = new BookErrorView("No category was found based on your search parameters.");
                 bev.Display();
             }
-            else
-            {
-                Console.WriteLine("Scroll up to see more if more than 3 books were found.");
-            }
+            
             ReturnToMainMenuPrompt();
         }
 
