@@ -57,6 +57,7 @@
     <Compile Include="BookSearchDeweyView.cs" />
     <Compile Include="BookSearchGenreView.cs" />
     <Compile Include="BookSearchAuthorView.cs" />
+    <Compile Include="BookSearchAllView.cs" />
     <Compile Include="BookSearchTitleView.cs" />
     <Compile Include="BookSearchView.cs" />
     <Compile Include="BookView.cs" />
