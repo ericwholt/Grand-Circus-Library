@@ -21,7 +21,7 @@ namespace Grand_Circus_Library
         public void SaveBookList()
         {
             StringBuilder sb = new StringBuilder();
-            string header = "Title,Author,Genre,Status,DueDate,Synopsis";
+            string header = "Title,Author,Genre,Status,DueDate, CallNumber, Synopsis";
 
             sb.AppendLine(header);
 
