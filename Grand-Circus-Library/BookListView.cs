@@ -15,7 +15,7 @@ namespace Grand_Circus_Library
             this.BookList = BookList;
         }
 
-        public void Display()
+        public virtual void Display()
         {
             for (int i = 0; i < BookList.Count; i++)
             {
