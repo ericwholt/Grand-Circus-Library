@@ -119,6 +119,9 @@ namespace Grand_Circus_Library
                             b.DueDate = ValidateDateTime(list[i]);
                             break;
                         case 5:
+                            b.DeweySystem = list[i];
+                            break;
+                        case 6:
                             b.Synopsis = list[i];
                             break;
                         default:

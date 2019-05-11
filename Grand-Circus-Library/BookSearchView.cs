@@ -13,8 +13,8 @@ namespace Grand_Circus_Library
             Console.WriteLine("1. Search by Title");
             Console.WriteLine("2. Search by Author");
             Console.WriteLine("3. Search by Genre");
-            Console.WriteLine("4. Return to Main Menu");
-            Console.Write("How can we help you? Select 1-3: ");
+            Console.WriteLine("4. Search by Dewey Decimal System");
+            Console.Write("How can we help you? Select 1-4: ");
         }
     }
 }
