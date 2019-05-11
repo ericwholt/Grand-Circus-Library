@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Grand_Circus_Library
 {
-  class BookSearchDewey : IView
+  class BookSearchDeweyView : IView
   {
     public void Display()
     {
-      Console.Write("Dewey Decimal System: ");
+      Console.WriteLine("Dewey Decimal System: ");
       Console.WriteLine("FIC Fiction");
       Console.WriteLine("000 Computer Science, Information & General Works");
       Console.WriteLine("100 Philosophy & Psychology");
@@ -23,7 +23,7 @@ namespace Grand_Circus_Library
       Console.WriteLine("800 Literature");
       Console.WriteLine("900 History & Geography");
     
-      Console.WriteLine("Select a category FIC to 900 to search on: ");
+      Console.Write("Select a category FIC to 900 to search on: ");
     }
   }
 }

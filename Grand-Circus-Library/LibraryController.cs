@@ -82,7 +82,7 @@ namespace Grand_Circus_Library
 
             BookSearchView smv = new BookSearchView();
             smv.Display();
-            int userInput = GetIntFromUser(1, 3);
+            int userInput = GetIntFromUser(1, 4);
 
             if (userInput == 1)
             {
@@ -95,6 +95,10 @@ namespace Grand_Circus_Library
             else if (userInput == 3)
             {
                 SearchBookGenre();
+            }
+            else if (userInput == 4)
+            {
+              SearchBookDewey();
             }
             else
             {
@@ -160,8 +164,26 @@ namespace Grand_Circus_Library
             }
             ReturnToMainMenuPrompt();
         }
+    public void SearchBookDewey()
+    {
+      BookSearchDeweyView bsdv = new BookSearchDeweyView();
+      bsdv.Display();
 
-        public void CheckoutBook()
+      string userInput = Console.ReadLine().ToLower();
+
+      for (int i = 0; i < LibraryDb.Count; i++)
+      {
+        if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
+        {
+          Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+          //BookView bv = new BookView(LibraryDb[i]);
+          //bv.Display();
+        }
+      }
+      ReturnToMainMenuPrompt();
+    }
+
+    public void CheckoutBook()
         {
             //List<Book> filteredList = LibraryDb.Where(x => x.Status ==  true).ToList();//Filter out checked out books. Won't work we don't want to create a list without the book. We just want to not display it.
             BookCheckoutListView bclv = new BookCheckoutListView(LibraryDb);

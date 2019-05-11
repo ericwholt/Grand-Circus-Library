@@ -54,7 +54,7 @@
     <Compile Include="BookReturnToMainMenuView.cs" />
     <Compile Include="BookReturnView.cs" />
     <Compile Include="BookSaveCSV.cs" />
-    <Compile Include="BookSearchDewey.cs" />
+    <Compile Include="BookSearchDeweyView.cs" />
     <Compile Include="BookSearchGenreView.cs" />
     <Compile Include="BookSearchAuthorView.cs" />
     <Compile Include="BookSearchTitleView.cs" />
