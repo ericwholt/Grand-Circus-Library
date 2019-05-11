@@ -113,10 +113,10 @@ namespace Grand_Circus_Library
                             b.Genre = list[i];
                             break;
                         case 3:
-                            b.Publisher = list[i];
+                            b.Status = StringToTrueOrFalse(list[i]);
                             break;
                         case 4:
-                            b.Status = StringToTrueOrFalse(list[i]);
+                            b.DueDate = ValidateDateTime(list[i]);
                             break;
                         case 5:
                             b.Synopsis = list[i];
@@ -130,19 +130,31 @@ namespace Grand_Circus_Library
 
             return BookList;
         }
+        
+        private DateTime ValidateDateTime(string dateTime)
+        {
+            try
+            {
+                return Convert.ToDateTime(dateTime);
+            }
+            catch (Exception e)
+            {
+                return DateTime.MinValue;
+            }
+        }
 
         private bool StringToTrueOrFalse(string boolean)
         {
-            if (boolean.ToLower() == "true")
+            if (boolean.Trim().ToLower() == "true")
             {
                 return true;
             }
-            else if (boolean.ToLower() == "false")
+            else if (boolean.Trim().ToLower() == "false")
             {
                 return false;
             }
             else
-                return false;
+                return true;//Assume it is not checked out if all else fails.
         }
     }
 }

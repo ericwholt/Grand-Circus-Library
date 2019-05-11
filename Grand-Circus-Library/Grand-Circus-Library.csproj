@@ -45,11 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Book.cs" />
+    <Compile Include="BookCheckoutListView.cs" />
     <Compile Include="BookCheckoutView.cs" />
     <Compile Include="BookErrorView.cs" />
     <Compile Include="BookListView.cs" />
     <Compile Include="BookLoadCSV.cs" />
     <Compile Include="BookMenuView.cs" />
+    <Compile Include="BookReturnToMainMenuView.cs" />
     <Compile Include="BookReturnView.cs" />
     <Compile Include="BookSaveCSV.cs" />
     <Compile Include="BookSearchDewey.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="BookSearchTitleView.cs" />
     <Compile Include="BookSearchView.cs" />
     <Compile Include="BookView.cs" />
+    <Compile Include="BookYesNoPromptView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="LibraryController.cs" />
     <Compile Include="Program.cs" />

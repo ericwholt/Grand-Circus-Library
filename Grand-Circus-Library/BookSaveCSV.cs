@@ -29,7 +29,7 @@ namespace Grand_Circus_Library
             {
                 sb.AppendLine(book.ToString());
             }
-            Console.WriteLine(sb.ToString());
+            //Console.WriteLine(sb.ToString());
             File.WriteAllText(Path, sb.ToString());
         }
     }

@@ -8,7 +8,7 @@ namespace Grand_Circus_Library
 {
     class BookReturnView : IView
     {
-        public List<Book> BookList { get; set; }
+        private List<Book> BookList {  get; set; }
         public BookReturnView(List<Book> BookList)
         {
             this.BookList = BookList;
@@ -16,15 +16,35 @@ namespace Grand_Circus_Library
 
         public void Display()
         {
-            Console.WriteLine("Books currently checked out");
-            for (int i = 0; i < BookList.Count; i++)
+            int bookCheckoutCount = 0;
+
+            Console.Clear();
+
+            foreach (Book book in BookList)
             {
-                if (!BookList[i].Status)
+                if (book.Status == false)
                 {
-                    Console.WriteLine($"{i} {BookList[i].Title} {BookList[i].DueDate}");
+                    bookCheckoutCount++;
                 }
             }
-            Console.Write("Which book would you like to return: ");
+            Console.WriteLine("Books currently checked out");
+            if (bookCheckoutCount > 0)
+            {
+
+
+                for (int i = 0; i < BookList.Count; i++)
+                {
+                    if (!BookList[i].Status)
+                    {
+                        Console.WriteLine($"{i + 1} {BookList[i].Title} due by {BookList[i].DueDate}");
+                    }
+                }
+                Console.Write("Which book would you like to return: ");
+            }
+            else
+            {
+                Console.WriteLine("No books currently checked out.");
+            }
 
         }
     }
