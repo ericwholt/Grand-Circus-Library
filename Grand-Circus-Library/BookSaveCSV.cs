@@ -13,10 +13,9 @@ namespace Grand_Circus_Library
         public List<Book> BookList { get; set; }
         private string Path { get { return ConfigurationManager.AppSettings["Path"];  } }
         
-        public BookSaveCSV()
+        public BookSaveCSV(List<Book> BookList)
         {
-            BookLoadCSV blcsv = new BookLoadCSV();
-            this.BookList = new List<Book>(blcsv.GetBookList());
+            this.BookList = new List<Book>(BookList);
         }
 
         public void SaveBookList()
