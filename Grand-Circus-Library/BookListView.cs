@@ -19,7 +19,7 @@ namespace Grand_Circus_Library
         {
             for (int i = 0; i < BookList.Count; i++)
             {
-                Console.WriteLine($"{i} {BookList[i].Title}");
+                Console.WriteLine($"{i+1} {BookList[i].Title}");
             }
         }
     }

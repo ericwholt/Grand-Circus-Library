@@ -8,6 +8,7 @@ namespace Grand_Circus_Library
   {
     public List<Book> LibraryDb { get; set; }
     public bool NoData { get; set; }
+    public List<Book> CheckoutBookList { get; set; }
 
     public LibraryController()
     {
@@ -150,39 +151,63 @@ namespace Grand_Circus_Library
     }
 
     public void CheckoutBook()
-        {
-            Console.WriteLine("Display checkout menu in method");
-        }
-        public void ReturnBook()
-        {
-            Console.WriteLine("Display return menu in method");
-        }
+    {
+        BookListView blv = new BookListView(LibraryDb);
+        blv.Display();
+        BookCheckoutView bcv = new BookCheckoutView();
+        bcv.Display();
 
-        /// <summary>
-        /// gets valid response and returns value(int)
-        /// </summary>
-        /// <returns>int</returns>
-        public static int GetIntFromUser(int min, int max)
-        {
-            try
-            {
-                int userInput = int.Parse(Console.ReadLine());
-                if (userInput >= min && userInput <= max)
-                {
-                    return userInput;
-                }
-                else
-                {
-                    throw new Exception();
-                }
+        int userInput = GetIntFromUser(1, 12);
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Please select options {min} - {max}");
-                return GetIntFromUser(min, max);
-            }
+        List<Book> CheckoutBookList = new List<Book>();
+
+        CheckoutBookList.Add(LibraryDb[userInput]);
+        blv.BookList.RemoveAt(userInput);
+
+        Console.WriteLine("Do you want to check out another book? Y/N"); //need to add loop
+
+        blv.Display(); //leftover books to choose from to add to cart again
+
+        Console.WriteLine("Books in your check out cart:");
+
+        for (int i = 0; i < CheckoutBookList.Count; i++)
+        {
+          Console.WriteLine($"{i + 1}. {CheckoutBookList[i].Title}");
         }
 
     }
-}
+
+    public void ReturnBook()
+    {
+      Console.WriteLine("Display return menu in method");
+    }
+
+    /// <summary>
+    /// gets valid response and returns value(int)
+    /// </summary>
+    /// <returns>int</returns>
+      public static int GetIntFromUser(int min, int max)
+      {
+          try
+          {
+            int userInput = int.Parse(Console.ReadLine());
+            if (userInput >= min && userInput <= max)
+            {
+              return userInput;
+            }
+            else
+            {
+              throw new Exception();
+            }
+
+          }
+          catch (Exception e)
+          {
+             Console.WriteLine($"Please select options {min} - {max}");
+             return GetIntFromUser(min, max);
+          }
+      }
+
+    }
+  }
+
