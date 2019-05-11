@@ -19,6 +19,7 @@ namespace Grand_Circus_Library
             int bookCheckoutCount = 0;
 
             Console.Clear();
+            bool inLibrary = false;
 
             foreach (Book book in BookList)
             {
@@ -31,12 +32,14 @@ namespace Grand_Circus_Library
             if (bookCheckoutCount > 0)
             {
 
-
+                int count = 0;
                 for (int i = 0; i < BookList.Count; i++)
                 {
-                    if (!BookList[i].Status)
+                    inLibrary = BookList[i].Status;
+                    if (!inLibrary)
                     {
-                        Console.WriteLine($"{i + 1} {BookList[i].Title} due by {BookList[i].DueDate.ToShortDateString()}");
+                        count++;
+                        Console.WriteLine($"{count} {BookList[i].Title} due by {BookList[i].DueDate.ToShortDateString()}");
                     }
                 }
                 Console.Write("Which book would you like to return: ");

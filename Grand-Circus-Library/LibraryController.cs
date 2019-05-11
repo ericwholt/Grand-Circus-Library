@@ -291,20 +291,22 @@ namespace Grand_Circus_Library
             BookReturnView brv = new BookReturnView(LibraryDb);
             brv.Display();
             List<int> ListOfBookIndexesCheckedOut = new List<int>();
+            bool error = false;
             if (CheckoutBookList.Count > 0)
             {
                 for (int i = 0; i < LibraryDb.Count; i++)
                 {
                     if (LibraryDb[i].Status == false)
                     {
-                        ListOfBookIndexesCheckedOut.Add(i + 1);
+                        ListOfBookIndexesCheckedOut.Add(i);
                     }
                 }
 
-                int userInput = GetSpecificIntFromUser(ListOfBookIndexesCheckedOut);
+
+                int userInput = GetIntFromUser(1, ListOfBookIndexesCheckedOut.Count);
                 if (!(userInput == -1))
                 {
-
+                    
                     for (int i = 0; i < CheckoutBookList.Count; i++)
                     {
                         if (CheckoutBookList[i] == LibraryDb[userInput - 1])
@@ -312,12 +314,16 @@ namespace Grand_Circus_Library
                             CheckoutBookList.RemoveAt(i);
                         }
                     }
-                    LibraryDb[userInput - 1].Status = true;
-                    LibraryDb[userInput - 1].DueDate = DateTime.MinValue;
+                    LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Status = true;
+                    LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.MinValue;
+                }
+                else
+                {
+                    error = true;
                 }
             }
 
-            if (CheckoutBookList.Count > 0)
+            if (CheckoutBookList.Count > 0 && !(error))
             {
                 if (GetYesOrNoFromUser("Would you like to return another book?"))
                 {
