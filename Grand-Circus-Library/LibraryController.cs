@@ -21,6 +21,12 @@ namespace Grand_Circus_Library
                 BookErrorView bev = new BookErrorView("Julius Caesar burnt down the library of Alexandria and set civilization back by a few hundred years.");
                 bev.Display();
             }
+            else if (LibraryDb.Count == 20)
+            {
+                NoData = true;
+                BookErrorView bev = new BookErrorView("Quintus Varo has your legions.");
+                bev.Display();
+            }
 
             CheckoutBookList = new List<Book>();
             foreach (Book book in LibraryDb)
@@ -98,7 +104,7 @@ namespace Grand_Circus_Library
             }
             else if (userInput == 4)
             {
-              SearchBookDewey();
+                SearchBookDewey();
             }
             else
             {
@@ -164,35 +170,39 @@ namespace Grand_Circus_Library
             }
             ReturnToMainMenuPrompt();
         }
-    public void SearchBookDewey()
-    {
-      BookSearchDeweyView bsdv = new BookSearchDeweyView();
-      bsdv.Display();
-
-      string userInput = Console.ReadLine().ToLower();
-
-      for (int i = 0; i < LibraryDb.Count; i++)
-      {
-        if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
+        public void SearchBookDewey()
         {
-          Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-          //BookView bv = new BookView(LibraryDb[i]);
-          //bv.Display();
-        }
-      }
-      ReturnToMainMenuPrompt();
-    }
+            BookSearchDeweyView bsdv = new BookSearchDeweyView();
+            bsdv.Display();
 
-    public void CheckoutBook()
+            string userInput = Console.ReadLine().ToLower();
+
+            for (int i = 0; i < LibraryDb.Count; i++)
+            {
+                if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
+                {
+                    Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+                    //BookView bv = new BookView(LibraryDb[i]);
+                    //bv.Display();
+                }
+            }
+            ReturnToMainMenuPrompt();
+        }
+
+        public void CheckoutBook()
         {
             //List<Book> filteredList = LibraryDb.Where(x => x.Status ==  true).ToList();//Filter out checked out books. Won't work we don't want to create a list without the book. We just want to not display it.
             BookCheckoutListView bclv = new BookCheckoutListView(LibraryDb);
             bclv.Display();//Display the books not checked out
             BookCheckoutView bcv = new BookCheckoutView();
             bcv.Display();
-
+            int numberOfCheckedOutBooks = CheckoutBookList.Count;
             int userInput = GetIntFromUser(1, 12);
-
+            if (userInput == -1)
+            {
+                SaveToCSV();
+                ReturnToMainMenuPrompt();
+            }
             CheckoutBookList.Add(LibraryDb[userInput - 1]);
             //blv.BookList.RemoveAt(userInput);
             LibraryDb[userInput - 1].Status = false;
@@ -204,6 +214,7 @@ namespace Grand_Circus_Library
 
 
             //Might want to add to its own view so it can be used here and in return view to list books currently checked out.
+            Console.Clear();
             Console.WriteLine("Books in your check out cart:");
             //Console.WriteLine(CheckoutBookList.Count);
             for (int i = 0; i < LibraryDb.Count; i++)
@@ -293,20 +304,28 @@ namespace Grand_Circus_Library
         {
             try
             {
-                int userInput = int.Parse(Console.ReadLine());
-                if (userInput >= min && userInput <= max)
+                string userInput = Console.ReadLine();
+                if (userInput.Trim().ToLower() == "cancel" || userInput.Trim().ToLower() == "c")
                 {
-                    return userInput;
+                    return -1;
                 }
                 else
                 {
-                    throw new Exception();
+                    int userInteger = int.Parse(userInput);
+                    if (userInteger >= min && userInteger <= max)
+                    {
+                        return userInteger;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
                 }
 
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Please select options {min} - {max}");
+                Console.WriteLine($"Please select options {min} - {max} or (C)ancel");
                 return GetIntFromUser(min, max);
             }
         }
@@ -320,7 +339,7 @@ namespace Grand_Circus_Library
         {
             BookYesNoPromptView bynpv = new BookYesNoPromptView(promptMessage);
             bynpv.Display();
-            string answer = Console.ReadLine().ToLower();
+            string answer = Console.ReadLine().Trim().ToLower();
 
             if (answer == "y" || answer == "yes")
             {
@@ -359,7 +378,7 @@ namespace Grand_Circus_Library
                         }
                         else if (i == specificIntsAllowed.Count - 1)
                         {
-                            message += $", or {specificIntsAllowed[i]}.";
+                            message += $", {specificIntsAllowed[i]}";
                         }
                         else if (i == specificIntsAllowed.Count)
                         {
