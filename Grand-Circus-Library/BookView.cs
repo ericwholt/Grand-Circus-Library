@@ -25,6 +25,7 @@ namespace Grand_Circus_Library
             Console.WriteLine("Genre: " + Book.Genre);
             Console.WriteLine("Publisher: " + Book.Publisher);
             Console.WriteLine($"Status: {(Book.Status ? "On Shelf" : "Checked Out")}"); //Ternary to display On Shelf if true or Checked Out if false
+            Console.WriteLine("Call Number: " + Book.DeweySystem);
             Console.WriteLine("Synopsis: " + Book.Synopsis);
         }
     }
