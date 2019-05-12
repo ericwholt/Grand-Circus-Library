@@ -16,10 +16,11 @@ namespace Grand_Circus_Library
         public bool Status { get; set; }
         public DateTime DueDate { get; set; }
         public string DeweySystem { get; set; }
+        public bool HoldStatus { get; set; }
 
         public override string ToString()
         {
-            return $"\"{Title}\",{Author},{Genre},{Status},{DueDate},{DeweySystem},\"{Synopsis}\"";
+            return $"\"{Title}\",{Author},{Genre},{Status},{HoldStatus},{DueDate},{DeweySystem},\"{Synopsis}\"";
         }
     }
 }
