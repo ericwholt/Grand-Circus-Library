@@ -238,16 +238,13 @@ namespace Grand_Circus_Library
 
         public void CheckoutBook()
         {
-
-
-            //List<Book> filteredList = LibraryDb.Where(x => x.Status ==  true).ToList();//Filter out checked out books. Won't work we don't want to create a list without the book. We just want to not display it.
             BookCheckoutListView bclv = new BookCheckoutListView(LibraryDb);
             bclv.Display();
 
             int numberOfCheckedOutBooks = CheckoutBookList.Count;
             int userInput = GetIntFromUser(1, 12);
 
-            if (BookList[userInput].Status == true)
+            if (LibraryDb[userInput].Status == false)
             {
                 bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
 
