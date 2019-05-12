@@ -141,10 +141,11 @@ namespace Grand_Circus_Library
             bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
-                if (LibraryDb[i].Title.ToLower().Contains(userInput))
+                Book selectedBook = LibraryDb[i];
+                if (selectedBook.Title.ToLower().Contains(userInput))
                 {
                     foundBook = true;
-                    BookView bv = new BookView(LibraryDb[i]);
+                    BookView bv = new BookView(selectedBook);
                     bv.Display();
                 }
             }
@@ -166,11 +167,12 @@ namespace Grand_Circus_Library
             bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
-                if (LibraryDb[i].Author.ToLower().Contains(userInput))
+                Book selectedBook = LibraryDb[i];
+                if (selectedBook.Author.ToLower().Contains(userInput))
                 {
                     //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
                     foundBook = true;
-                    BookView bv = new BookView(LibraryDb[i]);
+                    BookView bv = new BookView(selectedBook);
                     bv.Display();
                 }
                 else
@@ -199,7 +201,7 @@ namespace Grand_Circus_Library
                 foundBook = selectedBook.Genre.ToLower().Contains(userInput);
                 if (selectedBook.Genre.ToLower().Contains(userInput))
                 {
-                    BookView bv = new BookView(LibraryDb[i]);
+                    BookView bv = new BookView(selectedBook);
                     bv.Display();
                 }
             }
@@ -237,96 +239,6 @@ namespace Grand_Circus_Library
 
             ReturnToMainMenuPrompt();
         }
-
-        //public void SearchBook(string searchType)
-        //{
-        //    IView view;
-        //    searchType = searchType.ToLower().Trim();
-
-        //    if (searchType == "title")
-        //    {
-        //        view = new BookSearchTitleView();
-        //        view.Display();
-        //    }
-        //    else if (searchType == "genre")
-        //    {
-        //        view = new BookSearchGenreView();
-        //        view.Display();
-        //    }
-        //    else if (searchType == "author")
-        //    {
-        //        view = new BookSearchAuthorView();
-        //        view.Display();
-        //    }
-        //    else if (searchType == "dewey")
-        //    {
-        //        view = new BookSearchDeweyView();
-        //        view.Display();
-        //    }
-        //    else
-        //    {
-        //        view = new BookSearchAllView();
-        //        view.Display();
-        //    }
-
-        //    string message = "";
-        //    string errorMessage = "";
-        //    string userInput = Console.ReadLine().ToLower();
-        //    bool foundBook = false;
-
-        //    for (int i = 0; i < LibraryDb.Count; i++)
-        //    {
-        //        Book selectedBook = LibraryDb[i];
-
-        //        if (searchType == "title")
-        //        {
-        //            foundBook = selectedBook.Title.ToLower().Contains(userInput);
-        //            errorMessage = "No book title was found based on your search parameters.";
-        //        }
-        //        else if (searchType == "genre")
-        //        {
-        //            foundBook = selectedBook.Author.ToLower().Contains(userInput);
-        //            errorMessage = "No book genre was found based on your search parameters.";
-        //        }
-        //        else if (searchType == "author")
-        //        {
-        //            foundBook = selectedBook.Genre.ToLower().Contains(userInput);
-        //            errorMessage = "No author was found based on your search parameters.";
-        //        }
-        //        else if (searchType == "dewey")
-        //        {
-        //            foundBook = selectedBook.DeweySystem.ToLower().Contains(userInput);
-        //            message = $"{i + 1}. {selectedBook.Title} call number {selectedBook.DeweySystem}";
-        //            errorMessage = "No category was found based on your search parameters.";
-        //        }
-        //        else
-        //        {
-        //            foundBook = true;
-        //        }
-
-
-        //        if (foundBook)
-        //        {
-        //            if (searchType == "dewey")
-        //            {
-        //                Console.WriteLine(message);
-        //            }
-        //            else
-        //            {
-        //                BookView bv = new BookView(selectedBook);
-        //                bv.Display();
-        //            }
-        //        }
-        //    }
-
-        //    if (!foundBook)
-        //    {
-        //        BookErrorView bev = new BookErrorView(errorMessage);
-        //        bev.Display();
-        //    }
-
-        //    ReturnToMainMenuPrompt();
-        //}
 
         public void CheckoutBook()
         {
