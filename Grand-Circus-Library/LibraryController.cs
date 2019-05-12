@@ -101,7 +101,7 @@ namespace Grand_Circus_Library
             }
             else if (userInput == 3)
             {
-                SearchBookAuthor()
+                SearchBookAuthor();
             }
             else if (userInput == 4)
             {
