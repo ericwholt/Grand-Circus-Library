@@ -129,12 +129,15 @@ namespace Grand_Circus_Library
                             b.Status = StringToTrueOrFalse(list[i]);
                             break;
                         case 4:
-                            b.DueDate = ValidateDateTime(list[i]);
+                            b.HoldStatus = StringToTrueOrFalse(list[i]);
                             break;
                         case 5:
-                            b.DeweySystem = list[i];
+                            b.DueDate = ValidateDateTime(list[i]);
                             break;
                         case 6:
+                            b.DeweySystem = list[i];
+                            break;
+                        case 7:
                             b.Synopsis = list[i];
                             break;
                         default:
