@@ -120,14 +120,19 @@ namespace Grand_Circus_Library
         public void SearchBook(string searchType)
         {
             IView searchView = new SearchView(searchType);
- 
+
             if (searchType == "Dewey")
             {
                 searchView = new BookSearchDeweyView();
             }
             searchView.Display();
 
-            string userInput = Console.ReadLine().ToLower();
+            string userInput = "";
+            if (!(searchType == "All"))
+            {
+                userInput = Console.ReadLine().ToLower();
+            }
+
             bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
@@ -177,35 +182,38 @@ namespace Grand_Circus_Library
 
             //int numberOfCheckedOutBooks = CheckoutBookList.Count;
             int userInput = GetIntFromUser(1, LibraryDb.Count);//Get which book to checkout
-
-            Book selectedBook = LibraryDb[userInput - 1];//store the book in an easier to read variable
-            bool onShelf = selectedBook.Status; //Store the checked out status in an easier to read variable
-            bool onHold = selectedBook.HoldStatus;//Store the hold status in an easier to read variable
-
-            //Check the status of selected book and display appropriate message when they try to check out a book
-            if (onShelf == false && onHold == true)
+            if (userInput != -1)
             {
-                BookErrorView bev = new BookErrorView($"Sorry that book is already checked out and on hold. Check back after {selectedBook.DueDate.AddDays(14).ToShortDateString()}");
-                bev.Display();
-            }
-            else if (onShelf == false && onHold == false)
-            {
-                bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
-                if (response1 == true)
+
+                Book selectedBook = LibraryDb[userInput - 1];//store the book in an easier to read variable
+                bool onShelf = selectedBook.Status; //Store the checked out status in an easier to read variable
+                bool onHold = selectedBook.HoldStatus;//Store the hold status in an easier to read variable
+
+                //Check the status of selected book and display appropriate message when they try to check out a book
+                if (onShelf == false && onHold == true)
                 {
-                    selectedBook.HoldStatus = true;
-                    Console.Clear();
-                    Console.WriteLine("Your book has been placed on hold. We will notify you when available.");
+                    BookErrorView bev = new BookErrorView($"Sorry that book is already checked out and on hold. Check back after {selectedBook.DueDate.AddDays(14).ToShortDateString()}");
+                    bev.Display();
                 }
-            }
-            else
-            {
-                CheckoutBookList.Add(selectedBook);
-                selectedBook.Status = false;
-                selectedBook.DueDate = DateTime.Now.AddDays(14);
-                SaveToCSV();
-            }
+                else if (onShelf == false && onHold == false)
+                {
+                    bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
+                    if (response1 == true)
+                    {
+                        selectedBook.HoldStatus = true;
+                        Console.Clear();
+                        Console.WriteLine("Your book has been placed on hold. We will notify you when available.");
+                    }
+                }
+                else
+                {
+                    CheckoutBookList.Add(selectedBook);
+                    selectedBook.Status = false;
+                    selectedBook.DueDate = DateTime.Now.AddDays(14);
+                    SaveToCSV();
+                }
 
+            }
             //Display books currently checked out.
             BookCheckoutCartListView bcclv = new BookCheckoutCartListView(LibraryDb);
             bcclv.Display();
@@ -327,7 +335,14 @@ namespace Grand_Circus_Library
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Please select options {min} - {max} or (C)ancel");
+                if (max == 1)
+                {
+                    Console.WriteLine($"Please select option 1 or (C)ancel");
+                }
+                else
+                {
+                    Console.WriteLine($"Please select options {min} - {max} or (C)ancel");
+                }
                 return GetIntFromUser(min, max);
             }
         }

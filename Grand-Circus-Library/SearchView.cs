@@ -19,7 +19,7 @@ namespace Grand_Circus_Library
             }
             else
             {
-                Console.WriteLine($"{SearchType} of the book: ");
+                Console.Write($"{SearchType} of the book: ");
             }
         }
     }
