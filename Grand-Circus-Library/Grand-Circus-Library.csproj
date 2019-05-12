@@ -56,10 +56,6 @@
     <Compile Include="BookReturnView.cs" />
     <Compile Include="BookSaveCSV.cs" />
     <Compile Include="BookSearchDeweyView.cs" />
-    <Compile Include="BookSearchGenreView.cs" />
-    <Compile Include="BookSearchAuthorView.cs" />
-    <Compile Include="BookSearchAllView.cs" />
-    <Compile Include="BookSearchTitleView.cs" />
     <Compile Include="BookSearchView.cs" />
     <Compile Include="BookView.cs" />
     <Compile Include="BookYesNoPromptView.cs" />
@@ -68,6 +64,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BookWelcomeView.cs" />
+    <Compile Include="SearchView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
