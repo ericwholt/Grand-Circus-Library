@@ -244,54 +244,53 @@ namespace Grand_Circus_Library
             int numberOfCheckedOutBooks = CheckoutBookList.Count;
             int userInput = GetIntFromUser(1, 12);
 
-            if (LibraryDb[userInput].Status == false)
+            if (LibraryDb[userInput].Status == true)
             {
                 bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
 
                 if (response1 == true)
                 {
-
+                  LibraryDb[userInput - 1].HoldStatus = true;
                   LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
                   Console.WriteLine("Your book has been placed on hold. We will notify you when available.");    
                   //Save the checkout status to csv
  
                 }
             }
-      else
-      {
-          CheckoutBookList.Add(LibraryDb[userInput - 1]);
-        //blv.BookList.RemoveAt(userInput);
-        LibraryDb[userInput - 1].Status = false;
-        LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
-        SaveToCSV();
-       
-        //blv.Display();
-
-        //Might want to add to its own view so it can be used here and in return view to list books currently checked out.
-        Console.Clear();
-        Console.WriteLine("Books in your check out cart:");
-        //Console.WriteLine(CheckoutBookList.Count);
-        for (int i = 0; i < LibraryDb.Count; i++)
-        {
-          if (LibraryDb[i].Status == false)
-          {
-            Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} due on {LibraryDb[i].DueDate.ToShortDateString()}");
-          }
-        }
-      }
-
-      bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
-
-            //leftover books to choose from to add to cart again
-            if (response == true)
+            else
             {
-                CheckoutBook();
+                CheckoutBookList.Add(LibraryDb[userInput - 1]);
+              //blv.BookList.RemoveAt(userInput);
+              LibraryDb[userInput - 1].Status = false;
+              SaveToCSV();
+       
+              //blv.Display();
+
+              //Might want to add to its own view so it can be used here and in return view to list books currently checked out.
+              Console.Clear();
+              Console.WriteLine("Books in your check out cart:");
+              //Console.WriteLine(CheckoutBookList.Count);
+              for (int i = 0; i < LibraryDb.Count; i++)
+              {
+                if (LibraryDb[i].Status == false)
+                {
+                  Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} due on {LibraryDb[i].DueDate.ToShortDateString()}");
+                }
+              }
             }
 
-            //Save the checkout status to csv
-            SaveToCSV();
+        bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
 
-            ReturnToMainMenuPrompt();
+        //leftover books to choose from to add to cart again
+        if (response == true)
+        {
+           CheckoutBook();
+        }
+
+        //Save the checkout status to csv
+        SaveToCSV();
+
+        ReturnToMainMenuPrompt();
         }
 
         public void ReturnBook()
