@@ -141,10 +141,11 @@ namespace Grand_Circus_Library
             bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
-                if (LibraryDb[i].Title.ToLower().Contains(userInput))
+                Book selectedBook = LibraryDb[i];
+                if (selectedBook.Title.ToLower().Contains(userInput))
                 {
                     foundBook = true;
-                    BookView bv = new BookView(LibraryDb[i]);
+                    BookView bv = new BookView(selectedBook);
                     bv.Display();
                 }
             }
@@ -166,11 +167,12 @@ namespace Grand_Circus_Library
             bool foundBook = false;
             for (int i = 0; i < LibraryDb.Count; i++)
             {
-                if (LibraryDb[i].Author.ToLower().Contains(userInput))
+                Book selectedBook = LibraryDb[i];
+                if (selectedBook.Author.ToLower().Contains(userInput))
                 {
                     //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
                     foundBook = true;
-                    BookView bv = new BookView(LibraryDb[i]);
+                    BookView bv = new BookView(selectedBook);
                     bv.Display();
                 }
                 else
@@ -199,7 +201,7 @@ namespace Grand_Circus_Library
                 foundBook = selectedBook.Genre.ToLower().Contains(userInput);
                 if (selectedBook.Genre.ToLower().Contains(userInput))
                 {
-                    BookView bv = new BookView(LibraryDb[i]);
+                    BookView bv = new BookView(selectedBook);
                     bv.Display();
                 }
             }
