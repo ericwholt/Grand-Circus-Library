@@ -39,7 +39,15 @@ namespace Grand_Circus_Library
                     if (!inLibrary)
                     {
                         count++;
+                        if(BookList[i].HoldStatus == true)
+                        {
+                        Console.WriteLine($"{count} {BookList[i].Title} due by {BookList[i].DueDate.ToShortDateString()} and is On Hold.");
+                        }
+                        else
+                        {
+
                         Console.WriteLine($"{count} {BookList[i].Title} due by {BookList[i].DueDate.ToShortDateString()}");
+                        }
                     }
                 }
                 Console.Write("Which book would you like to return: ");

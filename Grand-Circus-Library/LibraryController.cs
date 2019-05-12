@@ -96,7 +96,7 @@ namespace Grand_Circus_Library
             }
             else if (userInput == 2)
             {
-              SearchBookAuthor();
+                SearchBookAuthor();
             }
             else if (userInput == 3)
             {
@@ -117,21 +117,21 @@ namespace Grand_Circus_Library
             }
         }
 
-    public void SearchBookAll()
-    {
-      BookSearchAllView bsav = new BookSearchAllView();
-      bsav.Display();
+        public void SearchBookAll()
+        {
+            BookSearchAllView bsav = new BookSearchAllView();
+            bsav.Display();
 
-      for (int i = 0; i < LibraryDb.Count; i++)
-      { 
-          BookView bv = new BookView(LibraryDb[i]);
-          bv.Display();
-      }
+            for (int i = 0; i < LibraryDb.Count; i++)
+            {
+                BookView bv = new BookView(LibraryDb[i]);
+                bv.Display();
+            }
 
-      ReturnToMainMenuPrompt();
-    }
+            ReturnToMainMenuPrompt();
+        }
 
-    public void SearchBookTitle()
+        public void SearchBookTitle()
         {
             BookSearchTitleView bstv = new BookSearchTitleView();
             bstv.Display();
@@ -182,7 +182,7 @@ namespace Grand_Circus_Library
                 BookErrorView bev = new BookErrorView("No author was found based on your search parameters.");
                 bev.Display();
             }
-                ReturnToMainMenuPrompt();
+            ReturnToMainMenuPrompt();
         }
 
         public void SearchBookGenre()
@@ -221,7 +221,7 @@ namespace Grand_Circus_Library
                 if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
                 {
                     foundBook = true;
-                    Console.WriteLine($"{i+1}. {LibraryDb[i].Title} call number {LibraryDb[i].DeweySystem}");
+                    Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} call number {LibraryDb[i].DeweySystem}");
                     //BookView bv = new BookView(LibraryDb[i]);
                     //bv.Display();
                 }
@@ -232,7 +232,7 @@ namespace Grand_Circus_Library
                 BookErrorView bev = new BookErrorView("No category was found based on your search parameters.");
                 bev.Display();
             }
-            
+
             ReturnToMainMenuPrompt();
         }
 
@@ -244,53 +244,47 @@ namespace Grand_Circus_Library
             int numberOfCheckedOutBooks = CheckoutBookList.Count;
             int userInput = GetIntFromUser(1, 12);
 
-            if (LibraryDb[userInput].Status == true)
+
+            if (LibraryDb[userInput - 1].Status == false)
             {
                 bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
-
                 if (response1 == true)
                 {
-                  LibraryDb[userInput - 1].HoldStatus = true;
-                  LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
-                  Console.WriteLine("Your book has been placed on hold. We will notify you when available.");    
-                  //Save the checkout status to csv
- 
+                    LibraryDb[userInput - 1].HoldStatus = true;
+                    Console.WriteLine("Your book has been placed on hold. We will notify you when available.");
+                    //Save the checkout status to csv
+
                 }
             }
             else
             {
                 CheckoutBookList.Add(LibraryDb[userInput - 1]);
-              //blv.BookList.RemoveAt(userInput);
-              LibraryDb[userInput - 1].Status = false;
-              SaveToCSV();
-       
-              //blv.Display();
-
-              //Might want to add to its own view so it can be used here and in return view to list books currently checked out.
-              Console.Clear();
-              Console.WriteLine("Books in your check out cart:");
-              //Console.WriteLine(CheckoutBookList.Count);
-              for (int i = 0; i < LibraryDb.Count; i++)
-              {
+                LibraryDb[userInput - 1].Status = false;
+                LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
+                SaveToCSV();
+            }
+            Console.Clear();
+            Console.WriteLine("Books in your check out cart:");
+            for (int i = 0; i < LibraryDb.Count; i++)
+            {
                 if (LibraryDb[i].Status == false)
                 {
-                  Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} due on {LibraryDb[i].DueDate.ToShortDateString()}");
+                    Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} due on {LibraryDb[i].DueDate.ToShortDateString()}");
                 }
-              }
             }
 
-        bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
+            bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
 
-        //leftover books to choose from to add to cart again
-        if (response == true)
-        {
-           CheckoutBook();
-        }
+            //leftover books to choose from to add to cart again
+            if (response == true)
+            {
+                CheckoutBook();
+            }
 
-        //Save the checkout status to csv
-        SaveToCSV();
+            //Save the checkout status to csv
+            SaveToCSV();
 
-        ReturnToMainMenuPrompt();
+            ReturnToMainMenuPrompt();
         }
 
         public void ReturnBook()
@@ -312,7 +306,7 @@ namespace Grand_Circus_Library
 
                 int userInput = GetIntFromUser(1, ListOfBookIndexesCheckedOut.Count);
                 if (!(userInput == -1))
-                {                    
+                {
                     for (int i = 0; i < CheckoutBookList.Count; i++)
                     {
                         if (CheckoutBookList[i] == LibraryDb[userInput - 1])
@@ -320,8 +314,17 @@ namespace Grand_Circus_Library
                             CheckoutBookList.RemoveAt(i);
                         }
                     }
-                    LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Status = true;
-                    LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.MinValue;
+                    if (LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].HoldStatus == true)
+                    {
+                        Console.WriteLine($"When you return {LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Title} another user checked it out.");
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.Now.AddDays(14);
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].HoldStatus = false;
+                    }
+                    else
+                    {
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Status = true;
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.MinValue;
+                    }
                 }
                 else
                 {
