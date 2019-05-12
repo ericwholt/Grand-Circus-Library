@@ -92,23 +92,24 @@ namespace Grand_Circus_Library
 
             if (userInput == 1)
             {
-                SearchBookAll();
+                //SearchBookAll();
+                SearchBook("All");
             }
             else if (userInput == 2)
             {
-              SearchBookAuthor();
+                SearchBook("Title");
             }
             else if (userInput == 3)
             {
-                SearchBookAuthor();
+                SearchBook("Author");
             }
             else if (userInput == 4)
             {
-                SearchBookGenre();
+                SearchBook("Genre");
             }
             else if (userInput == 5)
             {
-                SearchBookDewey();
+                SearchBook("Dewey");
             }
             else
             {
@@ -117,122 +118,213 @@ namespace Grand_Circus_Library
             }
         }
 
-    public void SearchBookAll()
-    {
-      BookSearchAllView bsav = new BookSearchAllView();
-      bsav.Display();
+        //public void SearchBookAll()
+        //{
+        //    BookSearchAllView bsav = new BookSearchAllView();
+        //    bsav.Display();
 
-      for (int i = 0; i < LibraryDb.Count; i++)
-      { 
-          BookView bv = new BookView(LibraryDb[i]);
-          bv.Display();
-      }
+        //    for (int i = 0; i < LibraryDb.Count; i++)
+        //    {
+        //        BookView bv = new BookView(LibraryDb[i]);
+        //        bv.Display();
+        //    }
 
-      ReturnToMainMenuPrompt();
-    }
+        //    ReturnToMainMenuPrompt();
+        //}
 
-    public void SearchBookTitle()
+        //public void SearchBookTitle()
+        //{
+        //    BookSearchTitleView bstv = new BookSearchTitleView();
+        //    bstv.Display();
+
+        //    string userInput = Console.ReadLine().ToLower();
+        //    bool foundBook = false;
+        //    for (int i = 0; i < LibraryDb.Count; i++)
+        //    {
+        //        if (LibraryDb[i].Title.ToLower().Contains(userInput))
+        //        {
+        //            foundBook = true;
+        //            BookView bv = new BookView(LibraryDb[i]);
+        //            bv.Display();
+        //        }
+        //    }
+        //    if (!foundBook)
+        //    {
+        //        BookErrorView bev = new BookErrorView("No book title was found based on your search parameters.");
+        //        bev.Display();
+        //    }
+
+        //    ReturnToMainMenuPrompt();
+        //}
+
+        //public void SearchBookAuthor()
+        //{
+        //    BookSearchAuthorView bsav = new BookSearchAuthorView();
+        //    bsav.Display();
+
+        //    string userInput = Console.ReadLine().ToLower();
+        //    bool foundBook = false;
+        //    for (int i = 0; i < LibraryDb.Count; i++)
+        //    {
+        //        if (LibraryDb[i].Author.ToLower().Contains(userInput))
+        //        {
+        //            //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
+        //            foundBook = true;
+        //            BookView bv = new BookView(LibraryDb[i]);
+        //            bv.Display();
+        //        }
+        //        else
+        //        {
+
+        //        }
+        //    }
+        //    if (!foundBook)
+        //    {
+        //        BookErrorView bev = new BookErrorView("No author was found based on your search parameters.");
+        //        bev.Display();
+        //    }
+        //    ReturnToMainMenuPrompt();
+        //}
+
+        //public void SearchBookGenre()
+        //{
+        //    BookSearchGenreView bsgv = new BookSearchGenreView();
+        //    bsgv.Display();
+
+        //    string userInput = Console.ReadLine().ToLower();
+        //    bool foundBook = false;
+        //    for (int i = 0; i < LibraryDb.Count; i++)
+        //    {
+        //        Book selectedBook = LibraryDb[i];
+        //        foundBook = selectedBook.Genre.ToLower().Contains(userInput);
+        //        if (selectedBook.Genre.ToLower().Contains(userInput))
+        //        {
+        //            BookView bv = new BookView(LibraryDb[i]);
+        //            bv.Display();
+        //        }
+        //    }
+        //    if (!foundBook)
+        //    {
+        //        BookErrorView bev = new BookErrorView("No book genre was found based on your search parameters.");
+        //        bev.Display();
+        //    }
+        //    ReturnToMainMenuPrompt();
+        //}
+        //public void SearchBookDewey()
+        //{
+        //    BookSearchDeweyView bsdv = new BookSearchDeweyView();
+        //    bsdv.Display();
+
+        //    string userInput = Console.ReadLine().ToLower();
+        //    bool foundBook = false;
+
+        //    for (int i = 0; i < LibraryDb.Count; i++)
+        //    {
+        //        Book selectedBook = LibraryDb[i];
+        //        foundBook = selectedBook.DeweySystem.ToLower().Contains(userInput);
+
+        //        if (foundBook)
+        //        {
+        //            Console.WriteLine($"{i + 1}. {selectedBook.Title} call number {selectedBook.DeweySystem}");
+        //        }
+        //    }
+
+        //    if (!foundBook)
+        //    {
+        //        BookErrorView bev = new BookErrorView("No category was found based on your search parameters.");
+        //        bev.Display();
+        //    }
+
+        //    ReturnToMainMenuPrompt();
+        //}
+
+        public void SearchBook(string searchType)
         {
-            BookSearchTitleView bstv = new BookSearchTitleView();
-            bstv.Display();
+            IView view;
+            searchType = searchType.ToLower().Trim();
 
+            if (searchType == "title")
+            {
+                view = new BookSearchTitleView();
+                view.Display();
+            }
+            else if (searchType == "genre")
+            {
+                view = new BookSearchGenreView();
+                view.Display();
+            }
+            else if (searchType == "author")
+            {
+                view = new BookSearchAuthorView();
+                view.Display();
+            }
+            else if (searchType == "dewey")
+            {
+                view = new BookSearchDeweyView();
+                view.Display();
+            }
+            else
+            {
+                view = new BookSearchAllView();
+                view.Display();
+            }
+
+            string message = "";
+            string errorMessage = "";
             string userInput = Console.ReadLine().ToLower();
             bool foundBook = false;
+
             for (int i = 0; i < LibraryDb.Count; i++)
             {
-                if (LibraryDb[i].Title.ToLower().Contains(userInput))
+                Book selectedBook = LibraryDb[i];
+
+                if (searchType == "title")
                 {
-                    foundBook = true;
-                    BookView bv = new BookView(LibraryDb[i]);
-                    bv.Display();
+                    foundBook = selectedBook.Title.ToLower().Contains(userInput);
+                    errorMessage = "No book title was found based on your search parameters.";
                 }
-            }
-            if (!foundBook)
-            {
-                BookErrorView bev = new BookErrorView("No book title was found based on your search parameters.");
-                bev.Display();
-            }
-
-            ReturnToMainMenuPrompt();
-        }
-
-        public void SearchBookAuthor()
-        {
-            BookSearchAuthorView bsav = new BookSearchAuthorView();
-            bsav.Display();
-
-            string userInput = Console.ReadLine().ToLower();
-            bool foundBook = false;
-            for (int i = 0; i < LibraryDb.Count; i++)
-            {
-                if (LibraryDb[i].Author.ToLower().Contains(userInput))
+                else if (searchType == "genre")
                 {
-                    //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-                    foundBook = true;
-                    BookView bv = new BookView(LibraryDb[i]);
-                    bv.Display();
+                    foundBook = selectedBook.Author.ToLower().Contains(userInput);
+                    errorMessage = "No book genre was found based on your search parameters.";
+                }
+                else if (searchType == "author")
+                {
+                    foundBook = selectedBook.Genre.ToLower().Contains(userInput);
+                    errorMessage = "No author was found based on your search parameters.";
+                }
+                else if (searchType == "dewey")
+                {
+                    foundBook = selectedBook.DeweySystem.ToLower().Contains(userInput);
+                    message = $"{i + 1}. {selectedBook.Title} call number {selectedBook.DeweySystem}";
+                    errorMessage = "No category was found based on your search parameters.";
                 }
                 else
                 {
-
-                }
-            }
-            if (!foundBook)
-            {
-                BookErrorView bev = new BookErrorView("No author was found based on your search parameters.");
-                bev.Display();
-            }
-                ReturnToMainMenuPrompt();
-        }
-
-        public void SearchBookGenre()
-        {
-            BookSearchGenreView bsgv = new BookSearchGenreView();
-            bsgv.Display();
-
-            string userInput = Console.ReadLine().ToLower();
-            bool foundBook = false;
-            for (int i = 0; i < LibraryDb.Count; i++)
-            {
-                if (LibraryDb[i].Genre.ToLower().Contains(userInput))
-                {
                     foundBook = true;
-                    //Console.WriteLine($"{i}. {LibraryDb[i].Title} written by {LibraryDb[i].Author}");
-                    BookView bv = new BookView(LibraryDb[i]);
-                    bv.Display();
                 }
-            }
-            if (!foundBook)
-            {
-                BookErrorView bev = new BookErrorView("No book genre was found based on your search parameters.");
-                bev.Display();
-            }
-            ReturnToMainMenuPrompt();
-        }
-        public void SearchBookDewey()
-        {
-            BookSearchDeweyView bsdv = new BookSearchDeweyView();
-            bsdv.Display();
 
-            string userInput = Console.ReadLine().ToLower();
-            bool foundBook = false;
-            for (int i = 0; i < LibraryDb.Count; i++)
-            {
-                if (LibraryDb[i].DeweySystem.ToLower().Contains(userInput))
+
+                if (foundBook)
                 {
-                    foundBook = true;
-                    Console.WriteLine($"{i+1}. {LibraryDb[i].Title} call number {LibraryDb[i].DeweySystem}");
-                    //BookView bv = new BookView(LibraryDb[i]);
-                    //bv.Display();
+                    if (searchType == "dewey")
+                    {
+                        Console.WriteLine(message);
+                    }
+                    else
+                    {
+                        BookView bv = new BookView(selectedBook);
+                        bv.Display();
+                    }
                 }
             }
 
             if (!foundBook)
             {
-                BookErrorView bev = new BookErrorView("No category was found based on your search parameters.");
+                BookErrorView bev = new BookErrorView(errorMessage);
                 bev.Display();
             }
-            
+
             ReturnToMainMenuPrompt();
         }
 
@@ -241,56 +333,53 @@ namespace Grand_Circus_Library
             BookCheckoutListView bclv = new BookCheckoutListView(LibraryDb);
             bclv.Display();
 
-            int numberOfCheckedOutBooks = CheckoutBookList.Count;
-            int userInput = GetIntFromUser(1, 12);
+            //int numberOfCheckedOutBooks = CheckoutBookList.Count;
+            int userInput = GetIntFromUser(1, LibraryDb.Count);//Get which book to checkout
 
-            if (LibraryDb[userInput].Status == true)
+            Book selectedBook = LibraryDb[userInput - 1];//store the book in an easier to read variable
+            bool onShelf = selectedBook.Status; //Store the checked out status in an easier to read variable
+            bool onHold = selectedBook.HoldStatus;//Store the hold status in an easier to read variable
+
+            //Check the status of selected book and display appropriate message when they try to check out a book
+            if (onShelf == false && onHold == true)
+            {
+                BookErrorView bev = new BookErrorView($"Sorry that book is already checked out and on hold. Check back after {selectedBook.DueDate.AddDays(14).ToShortDateString()}");
+                bev.Display();
+            }
+            else if (onShelf == false && onHold == false)
             {
                 bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
-
                 if (response1 == true)
                 {
-                  LibraryDb[userInput - 1].HoldStatus = true;
-                  LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
-                  Console.WriteLine("Your book has been placed on hold. We will notify you when available.");    
-                  //Save the checkout status to csv
- 
+                    selectedBook.HoldStatus = true;
+                    Console.Clear();
+                    Console.WriteLine("Your book has been placed on hold. We will notify you when available.");
                 }
             }
             else
             {
-                CheckoutBookList.Add(LibraryDb[userInput - 1]);
-              //blv.BookList.RemoveAt(userInput);
-              LibraryDb[userInput - 1].Status = false;
-              SaveToCSV();
-       
-              //blv.Display();
-
-              //Might want to add to its own view so it can be used here and in return view to list books currently checked out.
-              Console.Clear();
-              Console.WriteLine("Books in your check out cart:");
-              //Console.WriteLine(CheckoutBookList.Count);
-              for (int i = 0; i < LibraryDb.Count; i++)
-              {
-                if (LibraryDb[i].Status == false)
-                {
-                  Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} due on {LibraryDb[i].DueDate.ToShortDateString()}");
-                }
-              }
+                CheckoutBookList.Add(selectedBook);
+                selectedBook.Status = false;
+                selectedBook.DueDate = DateTime.Now.AddDays(14);
+                SaveToCSV();
             }
 
-        bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
+            //Display books currently checked out.
+            BookCheckoutCartListView bcclv = new BookCheckoutCartListView(LibraryDb);
+            bcclv.Display();
 
-        //leftover books to choose from to add to cart again
-        if (response == true)
-        {
-           CheckoutBook();
-        }
+            bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
 
-        //Save the checkout status to csv
-        SaveToCSV();
+            //leftover books to choose from to add to cart again
+            if (response == true)
+            {
+                CheckoutBook();
+            }
 
-        ReturnToMainMenuPrompt();
+            //Save the checkout status to csv
+            SaveToCSV();
+
+            ReturnToMainMenuPrompt();
         }
 
         public void ReturnBook()
@@ -312,7 +401,7 @@ namespace Grand_Circus_Library
 
                 int userInput = GetIntFromUser(1, ListOfBookIndexesCheckedOut.Count);
                 if (!(userInput == -1))
-                {                    
+                {
                     for (int i = 0; i < CheckoutBookList.Count; i++)
                     {
                         if (CheckoutBookList[i] == LibraryDb[userInput - 1])
@@ -320,8 +409,18 @@ namespace Grand_Circus_Library
                             CheckoutBookList.RemoveAt(i);
                         }
                     }
-                    LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Status = true;
-                    LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.MinValue;
+                    if (LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].HoldStatus == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"When you return {LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Title} another user checked it out.");
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.Now.AddDays(14);
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].HoldStatus = false;
+                    }
+                    else
+                    {
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Status = true;
+                        LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.MinValue;
+                    }
                 }
                 else
                 {
@@ -364,13 +463,15 @@ namespace Grand_Circus_Library
             try
             {
                 string userInput = Console.ReadLine();
+                int userInteger = -1;
                 if (userInput.Trim().ToLower() == "cancel" || userInput.Trim().ToLower() == "c")
                 {
                     return -1;
                 }
                 else
                 {
-                    int userInteger = int.Parse(userInput);
+                    userInteger = int.Parse(userInput);
+
                     if (userInteger >= min && userInteger <= max)
                     {
                         return userInteger;
