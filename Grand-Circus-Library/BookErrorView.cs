@@ -18,6 +18,7 @@ namespace Grand_Circus_Library
 
         public void Display()
         {
+            Console.Clear();
           Console.WriteLine(Message);
         }
     }
