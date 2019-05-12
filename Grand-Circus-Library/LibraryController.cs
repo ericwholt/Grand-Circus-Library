@@ -241,37 +241,40 @@ namespace Grand_Circus_Library
             BookCheckoutListView bclv = new BookCheckoutListView(LibraryDb);
             bclv.Display();
 
-            int numberOfCheckedOutBooks = CheckoutBookList.Count;
-            int userInput = GetIntFromUser(1, 12);
+            //int numberOfCheckedOutBooks = CheckoutBookList.Count;
+            int userInput = GetIntFromUser(1, LibraryDb.Count);//Get which book to checkout
 
+            Book selectedBook = LibraryDb[userInput - 1];//store the book in an easier to read variable
+            bool onShelf = selectedBook.Status; //Store the checked out status in an easier to read variable
+            bool onHold = selectedBook.HoldStatus;//Store the hold status in an easier to read variable
 
-            if (LibraryDb[userInput - 1].Status == false)
+            //Check the status of selected book and display appropriate message when they try to check out a book
+            if (onShelf == false && onHold == true)
+            {
+                BookErrorView bev = new BookErrorView($"Sorry that book is already checked out and on hold. Check back after {selectedBook.DueDate.AddDays(14).ToShortDateString()}");
+                bev.Display();
+            }
+            else if (onShelf == false && onHold == false)
             {
                 bool response1 = GetYesOrNoFromUser("Do you want to place this book on hold?");
                 if (response1 == true)
                 {
-                    LibraryDb[userInput - 1].HoldStatus = true;
+                    selectedBook.HoldStatus = true;
+                    Console.Clear();
                     Console.WriteLine("Your book has been placed on hold. We will notify you when available.");
-                    //Save the checkout status to csv
-
                 }
             }
             else
             {
-                CheckoutBookList.Add(LibraryDb[userInput - 1]);
-                LibraryDb[userInput - 1].Status = false;
-                LibraryDb[userInput - 1].DueDate = DateTime.Now.AddDays(14);
+                CheckoutBookList.Add(selectedBook);
+                selectedBook.Status = false;
+                selectedBook.DueDate = DateTime.Now.AddDays(14);
                 SaveToCSV();
             }
-            Console.Clear();
-            Console.WriteLine("Books in your check out cart:");
-            for (int i = 0; i < LibraryDb.Count; i++)
-            {
-                if (LibraryDb[i].Status == false)
-                {
-                    Console.WriteLine($"{i + 1}. {LibraryDb[i].Title} due on {LibraryDb[i].DueDate.ToShortDateString()}");
-                }
-            }
+
+            //Display books currently checked out.
+            BookCheckoutCartListView bcclv = new BookCheckoutCartListView(LibraryDb);
+            bcclv.Display();
 
             bool response = GetYesOrNoFromUser("Do you want to check out another book?"); //Gets yes or no from user
 
@@ -285,6 +288,11 @@ namespace Grand_Circus_Library
             SaveToCSV();
 
             ReturnToMainMenuPrompt();
+        }
+
+        public void ListBooksInCheckout()
+        {
+
         }
 
         public void ReturnBook()
@@ -316,6 +324,7 @@ namespace Grand_Circus_Library
                     }
                     if (LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].HoldStatus == true)
                     {
+                        Console.Clear();
                         Console.WriteLine($"When you return {LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].Title} another user checked it out.");
                         LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].DueDate = DateTime.Now.AddDays(14);
                         LibraryDb[ListOfBookIndexesCheckedOut[userInput - 1]].HoldStatus = false;
@@ -367,15 +376,17 @@ namespace Grand_Circus_Library
             try
             {
                 string userInput = Console.ReadLine();
+                int userInteger = -1;
                 if (userInput.Trim().ToLower() == "cancel" || userInput.Trim().ToLower() == "c")
                 {
                     return -1;
                 }
                 else
                 {
-                    int userInteger = int.Parse(userInput);
+                    userInteger = int.Parse(userInput);
+
                     if (userInteger >= min && userInteger <= max)
-                    {
+                    {                        
                         return userInteger;
                     }
                     else
