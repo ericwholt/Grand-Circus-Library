@@ -19,7 +19,7 @@ namespace Grand_Circus_Library
             int bookCheckoutCount = 0;
 
             Console.Clear();
-            bool inLibrary = false;
+            bool onShelf = false;
 
             foreach (Book book in BookList)
             {
@@ -35,8 +35,8 @@ namespace Grand_Circus_Library
                 int count = 0;
                 for (int i = 0; i < BookList.Count; i++)
                 {
-                    inLibrary = BookList[i].Status;
-                    if (!inLibrary)
+                    onShelf = BookList[i].Status;
+                    if (!onShelf)
                     {
                         count++;
                         if(BookList[i].HoldStatus == true)
