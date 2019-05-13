@@ -39,10 +39,10 @@ namespace Grand_Circus_Library
                 }
             }
         }
-        
+
         public void RunLibrary()
         {
-            
+
             if (!NoData)
             {
                 LibraryWelcome();
@@ -121,6 +121,8 @@ namespace Grand_Circus_Library
         //method for searching a book and error for search parameters
         public void SearchBook(string searchType)
         {
+            //searchView changes depending on what is being searched. 
+            //generic Iview is used to store different views depending on search type.
             IView searchView = new SearchView(searchType);
 
             if (searchType == "Dewey")
@@ -129,6 +131,7 @@ namespace Grand_Circus_Library
             }
             searchView.Display();
 
+            //no user input needed for search all books
             string userInput = "";
             if (!(searchType == "All"))
             {
@@ -242,7 +245,7 @@ namespace Grand_Circus_Library
             brv.Display();
             List<int> ListOfBookIndexesCheckedOut = new List<int>();//Store a list of LibraryDb indexes of the checkedout books
             bool error = false;
-            
+
             if (CheckoutBookList.Count > 0)//Check to make sure we have checkedout books
             {
                 for (int i = 0; i < LibraryDb.Count; i++)
@@ -384,74 +387,5 @@ namespace Grand_Circus_Library
 
             }
         }
-
-        /// <summary>
-        /// gets valid response and returns value(int). If int array empty it will return -1 as error
-        /// </summary>
-        /// <returns>int</returns>
-        private int GetSpecificIntFromUser(List<int> specificIntsAllowed)
-        {
-            if (!(specificIntsAllowed.Count == 0))
-            {
-
-
-                try
-                {
-                    string message = "Please select number";
-                    for (int i = 0; i < specificIntsAllowed.Count; i++)
-                    {
-                        if (i == 0)
-                        {
-                            message += $" {specificIntsAllowed[i]}";
-                        }
-                        else if (i == specificIntsAllowed.Count - 1)
-                        {
-                            message += $", {specificIntsAllowed[i]}";
-                        }
-                        else if (i == specificIntsAllowed.Count)
-                        {
-                            //do nothing
-                        }
-                        else
-                        {
-                            message += $", {specificIntsAllowed[i]}";
-                        }
-                    }
-                    message += ", or (C)ancel";
-                    Console.WriteLine(message);
-                    string userInput = Console.ReadLine();
-                    if (userInput.Trim().ToLower() == "cancel" || userInput.Trim().ToLower() == "c")
-                    {
-                        return -1;
-                    }
-                    int userInt = int.Parse(userInput);
-                    foreach (int integer in specificIntsAllowed)
-                    {
-                        if (integer == userInt)
-                        {
-                            return userInt;
-                        }
-                    }
-                    throw new Exception();
-
-                }
-                catch (Exception e)
-                {
-                    //string message = "Please select number";
-                    //for (int i = 0; i < specificIntsAllowed.Count; i++)
-                    //{
-                    //    if (i == specificIntsAllowed.Count - 1)
-                    //    {
-                    //        message += $", or {specificIntsAllowed[i]}.";
-                    //    }
-                    //    message += $", {specificIntsAllowed[i]}";
-                    //}
-                    Console.WriteLine("Invalid input!");
-                    return GetSpecificIntFromUser(specificIntsAllowed);
-                }
-            }
-            return -1;
-        }
     }
 }
-

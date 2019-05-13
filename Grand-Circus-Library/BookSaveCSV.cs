@@ -29,8 +29,15 @@ namespace Grand_Circus_Library
             {
                 sb.AppendLine(book.ToString());
             }
-            //Console.WriteLine(sb.ToString());
-            File.WriteAllText(Path, sb.ToString());
+        try
+        {
+          File.WriteAllText(Path, sb.ToString());
+        }
+        catch (Exception e)
+        {
+        Console.WriteLine("Unable to save file.");
+        }
+            
         }
     }
 }
