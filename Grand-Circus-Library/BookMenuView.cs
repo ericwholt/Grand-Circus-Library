@@ -8,6 +8,7 @@ namespace Grand_Circus_Library
 {
     class BookMenuView : IView
     {
+        //main menu of library
         public void Display()
         {
             Console.WriteLine("1. Search for a book");

@@ -6,6 +6,7 @@ namespace Grand_Circus_Library
     {
         public void Display()
         {
+          //dewey decimal system is for category search with call numbers. first 3 digits are subject and last 3 are last name of author.
             Console.Clear();
             Console.WriteLine("Dewey Decimal System: ");
             Console.WriteLine("FIC Fiction");
