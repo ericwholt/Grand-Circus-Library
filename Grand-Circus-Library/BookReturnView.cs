@@ -13,7 +13,7 @@ namespace Grand_Circus_Library
         {
             this.BookList = BookList;
         }
-
+        //renumbering return list for customer
         public void Display()
         {
             int bookCheckoutCount = 0;
@@ -28,6 +28,7 @@ namespace Grand_Circus_Library
                     bookCheckoutCount++;
                 }
             }
+            //displays books that are checked out
             Console.WriteLine("Books currently checked out");
             if (bookCheckoutCount > 0)
             {
@@ -38,6 +39,7 @@ namespace Grand_Circus_Library
                     inLibrary = BookList[i].Status;
                     if (!inLibrary)
                     {
+                        //split display for books with additional holds
                         count++;
                         if(BookList[i].HoldStatus == true)
                         {
@@ -45,7 +47,7 @@ namespace Grand_Circus_Library
                         }
                         else
                         {
-
+                        
                         Console.WriteLine($"{count} {BookList[i].Title} due by {BookList[i].DueDate.ToShortDateString()}");
                         }
                     }

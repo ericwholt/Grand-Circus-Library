@@ -13,6 +13,7 @@ namespace Grand_Circus_Library
         {
             this.Prompt = Prompt;
         }
+        //used for asking library patron yes or no
         public void Display()
         {
             Console.WriteLine(Prompt.Trim() + " (Yes or No)");

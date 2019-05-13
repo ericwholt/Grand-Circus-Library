@@ -5,6 +5,7 @@ namespace Grand_Circus_Library
 {
     class BookCheckoutListView : BookListView
     {
+        //list of books in checkout
         public BookCheckoutListView(List<Book> BookList) : base(BookList)
         {
 
@@ -20,6 +21,7 @@ namespace Grand_Circus_Library
                     if (BookList[i].Status == false)
                     {
                         listCreated = true;
+                        //displayed updated status of books
                         if (BookList[i].HoldStatus == true)
                         {
                             Console.WriteLine($"{i + 1}. {BookList[i].Title} status {(BookList[i].Status ? "On Shelf" : "Checked Out")} and On Hold.");

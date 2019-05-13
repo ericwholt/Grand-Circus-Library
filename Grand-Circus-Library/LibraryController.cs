@@ -13,8 +13,10 @@ namespace Grand_Circus_Library
         public LibraryController()
         {
             BookLoadCSV BookDatabase = new BookLoadCSV();
+            //this library is created from a csv file
             LibraryDb = new List<Book>(BookDatabase.GetBookList());
 
+            //error handling if no csv data is loaded
             if (LibraryDb.Count == 0)
             {
                 NoData = true;
@@ -27,7 +29,7 @@ namespace Grand_Circus_Library
                 BookErrorView bev = new BookErrorView("Quintus Varo has your legions.");
                 bev.Display();
             }
-
+            //creates a checkout book list from csv file
             CheckoutBookList = new List<Book>();
             foreach (Book book in LibraryDb)
             {
@@ -37,10 +39,10 @@ namespace Grand_Circus_Library
                 }
             }
         }
-
+        
         public void RunLibrary()
         {
-            //Console.WriteLine($"LibraryDb Count: {LibraryDb.Count}");
+            
             if (!NoData)
             {
                 LibraryWelcome();
@@ -51,14 +53,14 @@ namespace Grand_Circus_Library
                 Console.ReadKey();
             }
         }
-
+        //method displays library logo
         public void LibraryWelcome()
         {
             BookWelcomeView wv = new BookWelcomeView();
             wv.Display();
             Thread.Sleep(5000);
         }
-
+        //method displays library menu
         public void LibraryMenu()
         {
             Console.Clear();
@@ -83,7 +85,7 @@ namespace Grand_Circus_Library
                 LibraryMenu();
             }
         }
-
+        //method displays menu within search
         public void SearchMenu()
         {
             BookSearchView smv = new BookSearchView();
@@ -116,7 +118,7 @@ namespace Grand_Circus_Library
                 LibraryMenu();
             }
         }
-
+        //method for searching a book and error for search parameters
         public void SearchBook(string searchType)
         {
             IView searchView = new SearchView(searchType);
@@ -175,6 +177,7 @@ namespace Grand_Circus_Library
             ReturnToMainMenuPrompt();
         }
 
+        //method for book selection, checkout and error handling
         public void CheckoutBook()
         {
             BookCheckoutListView bclv = new BookCheckoutListView(LibraryDb);
@@ -231,9 +234,10 @@ namespace Grand_Circus_Library
 
             ReturnToMainMenuPrompt();
         }
-
+        //method for selecting and returning a book
         public void ReturnBook()
         {
+            //lists books to return
             BookReturnView brv = new BookReturnView(LibraryDb);
             brv.Display();
             List<int> ListOfBookIndexesCheckedOut = new List<int>();
@@ -248,7 +252,7 @@ namespace Grand_Circus_Library
                     }
                 }
 
-
+                //updates status of books and displays to patron
                 int userInput = GetIntFromUser(1, ListOfBookIndexesCheckedOut.Count);
                 if (!(userInput == -1))
                 {
@@ -277,7 +281,7 @@ namespace Grand_Circus_Library
                     error = true;
                 }
             }
-
+            //ability to return another book
             if (CheckoutBookList.Count > 0 && !(error))
             {
                 if (GetYesOrNoFromUser("Would you like to return another book?"))
@@ -290,6 +294,7 @@ namespace Grand_Circus_Library
             ReturnToMainMenuPrompt();
         }
 
+        //method to return to main menu of library
         public void ReturnToMainMenuPrompt()
         {
             BookReturnToMainMenuView brmmv = new BookReturnToMainMenuView();
@@ -298,6 +303,7 @@ namespace Grand_Circus_Library
             LibraryMenu();
         }
 
+        //method to save csv file of checked out books
         public void SaveToCSV()
         {
             BookSaveCSV bscsv = new BookSaveCSV(LibraryDb);
@@ -333,6 +339,7 @@ namespace Grand_Circus_Library
                 }
 
             }
+            //error handling for mistyping
             catch (Exception e)
             {
                 if (max == 1)

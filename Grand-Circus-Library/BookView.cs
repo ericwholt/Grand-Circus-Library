@@ -17,6 +17,7 @@ namespace Grand_Circus_Library
             this.Book = Book;//Put book into property
         }
 
+        //Book information
         public void Display()
         {
             Console.WriteLine();

@@ -16,9 +16,10 @@ namespace Grand_Circus_Library
       this.Message = Message;
     }    
 
+        //error handle and messaging for users
         public void Display()
         {
-            Console.Clear();
+          Console.Clear();
           Console.WriteLine(Message);
         }
     }
