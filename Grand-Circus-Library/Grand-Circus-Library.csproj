@@ -47,7 +47,6 @@
     <Compile Include="Book.cs" />
     <Compile Include="BookCheckoutCartListView.cs" />
     <Compile Include="BookCheckoutListView.cs" />
-    <Compile Include="BookCheckoutView.cs" />
     <Compile Include="BookErrorView.cs" />
     <Compile Include="BookListView.cs" />
     <Compile Include="BookLoadCSV.cs" />

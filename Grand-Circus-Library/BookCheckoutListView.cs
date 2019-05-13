@@ -46,6 +46,7 @@ namespace Grand_Circus_Library
             }
             if (listCreated)
             {
+                Console.WriteLine();
                 Console.Write("Which book would you like to check out or (C)ancel: ");
             }
         }
