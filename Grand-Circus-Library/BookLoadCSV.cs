@@ -14,7 +14,7 @@ namespace Grand_Circus_Library
             BookList = new List<Book>();
         }
 
-
+        //use csv file to create a book list
         public List<Book> GetBookList()
         {
             List<List<string>> csv = new List<List<string>>();//This represents the excel sheet. The list inside are the rows and columns
@@ -31,6 +31,7 @@ namespace Grand_Circus_Library
                 }
                 catch (Exception)
                 {
+                    
                     List<Book> BookListOf20 = new List<Book>();
                     for (int i = 0; i < 20; i++)
                     {

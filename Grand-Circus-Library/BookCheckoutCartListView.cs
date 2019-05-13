@@ -8,6 +8,7 @@ namespace Grand_Circus_Library
 {
     class BookCheckoutCartListView : BookListView
     {
+        //list of checkout books in cart
         public BookCheckoutCartListView(List<Book> BookList) : base(BookList)
         {
 
@@ -18,6 +19,7 @@ namespace Grand_Circus_Library
             Console.WriteLine("Books in your check out cart:");
             for (int i = 0; i < BookList.Count; i++)
             {
+                //used for seperating books checked out and books on additional holds
                 if (BookList[i].Status == false && BookList[i].HoldStatus == true)
                 {
                     Console.WriteLine($"{i + 1}. {BookList[i].Title} is on hold and due on {BookList[i].DueDate.ToShortDateString()} ");

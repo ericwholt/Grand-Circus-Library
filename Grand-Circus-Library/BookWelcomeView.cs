@@ -6,6 +6,7 @@ namespace Grand_Circus_Library
   {
     public void Display()
     {
+      //logo for library
       Console.WriteLine(@"
   
                                      ██████╗ ██████╗  █████╗ ███╗   ██╗██████╗          
